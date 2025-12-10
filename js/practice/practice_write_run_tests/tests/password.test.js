@@ -6,32 +6,26 @@
 // import { Password } from "../src/BugMissingNumberCheck";
 // import { Password } from "../src/BugMissingPasswordCheck";
 // import { Password } from "../src/BugNeverContainsNumbers";
-// import { Password } from "../src/BugToShortPassword";
+import { Password } from "../src/BugToShortPassword";
 // import { Password } from "../src/BugVeryShort";
 // import { Password } from "../src/BugWrongHashingAlgorithm";
 // import { Password } from "../src/BugWrongMessage";
-import { Password } from "../src/Correct";
+// import { Password } from "../src/Correct";
+// import { Password } from "../src/MyBuggyVersion";
 
 describe("Password class, test suite", () => {
   //put constants here to increase readability
-  const testPassword = "Jonatan123456789";
-  const shortPassword = "Jonatan1234";
-  const veryShortPassword = "Jonata1";
-
-  // DoesNotHash
-  test("Constructor should hash password", () => {
-    const pw = new Password(testPassword);
-    const hashedPw = pw.getPasswordHash();
-    expect(hashedPw).not.toBe("Jonatan123456789");
-  });
+  const testPassword = "1Jonatan123456789";
+  const shortPassword = "1Jonatan123";
+  const veryShortPassword = "1Jonata";
 
   // DoesNotTrim
   test("Constructor should trim password", () => {
     const passwordWithSpaces = new Password(
-      "  Jonatan123456789  "
+      "  1Jonatan123456789  "
     ).getPasswordHash();
     const passwordWithoutSpaces = new Password(
-      "Jonatan123456789"
+      "1Jonatan123456789"
     ).getPasswordHash();
 
     expect(passwordWithSpaces).toEqual(passwordWithoutSpaces);
@@ -39,8 +33,8 @@ describe("Password class, test suite", () => {
 
   // AlwaysSame
   test("isPasswordSame Should distinguish between different passwords", () => {
-    const firstPassword = new Password("Jonatan123456789");
-    const secondPassword = new Password("Jonatan12345678");
+    const firstPassword = new Password("1Jonatan123456789");
+    const secondPassword = new Password("1Jonatan12345678");
 
     expect(firstPassword.isPasswordSame(secondPassword)).toBe(false);
   });
@@ -66,7 +60,7 @@ describe("Password class, test suite", () => {
     }).toThrow("Too short password");
   });
 
-  // WrongHashingAlgorithm
+  // WrongHashingAlgorithm + DoesNotHash
   test("Constructor Should hash passwords correctly", () => {
     const password = new Password(testPassword);
 
