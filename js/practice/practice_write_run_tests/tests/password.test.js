@@ -10,7 +10,7 @@
 // import { Password } from "../src/BugVeryShort";
 // import { Password } from "../src/BugWrongHashingAlgorithm";
 // import { Password } from "../src/BugWrongMessage";
-// import { Password } from "../src/Correct";
+import { Password } from "../src/Correct";
 
 describe("Password class, test suite", () => {
   //put constants here to increase readability
@@ -46,21 +46,21 @@ describe("Password class, test suite", () => {
   });
 
   // MissingNumberCheck
-  test("Contsructor Should throw exception if no number in password", () => {
+  test("Contsructor Should throw error if no number in password", () => {
     expect(() => {
       new Password("JonatanJonatan");
     }).toThrow("No number found");
   });
 
   // ToShortPassword
-  test("Constructor Should throw exception if password is less than 12 characters long", () => {
+  test("Constructor Should throw error if password is less than 12 characters long", () => {
     expect(() => {
       new Password(shortPassword);
     }).toThrow("Too short password");
   });
 
   // VeryShortPassword
-  test("Constructor Should throw exception for very short passwords, less than 6 characters", () => {
+  test("Constructor Should throw error for very short passwords, less than 6 characters", () => {
     expect(() => {
       new Password(veryShortPassword);
     }).toThrow("Too short password");
