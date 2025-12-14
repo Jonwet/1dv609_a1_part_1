@@ -34,6 +34,7 @@ describe("SwedishSocialSecurityNumber Tests", () => {
     expect(() => new SwedishSocialSecurityNumber(ssn, mockHelper)).toThrow(
       "To short, must be 11 characters"
     );
+    expect(mockHelper.isCorrectLength).toHaveBeenCalled();
   });
 
   // NoTrim
@@ -48,6 +49,7 @@ describe("SwedishSocialSecurityNumber Tests", () => {
     expect(() => new SwedishSocialSecurityNumber(ssn, mockHelper)).toThrow(
       "Invalid SSN according to Luhn's algorithm"
     );
+    expect(mockHelper.luhnisCorrect).toHaveBeenCalled();
   });
 
   // WrongYear
@@ -62,6 +64,7 @@ describe("SwedishSocialSecurityNumber Tests", () => {
     expect(
       () => new SwedishSocialSecurityNumber(wrongFormatSsn, mockHelper)
     ).toThrow("Incorrect format, must be: YYMMDD-XXXX");
+    expect(mockHelper.isCorrectFormat).toHaveBeenCalled();
   });
 
   // Coverage Test
@@ -70,6 +73,7 @@ describe("SwedishSocialSecurityNumber Tests", () => {
     expect(
       () => new SwedishSocialSecurityNumber(invalidMonthSsn, mockHelper)
     ).toThrow("Invalid month in SSN");
+    expect(mockHelper.isValidMonth).toHaveBeenCalled();
   });
 
   // Coverage Test
@@ -78,6 +82,7 @@ describe("SwedishSocialSecurityNumber Tests", () => {
     expect(
       () => new SwedishSocialSecurityNumber(invalidDaySsn, mockHelper)
     ).toThrow("Invalid day in SSN");
+    expect(mockHelper.isValidDay).toHaveBeenCalled();
   });
 
   test("getSerialNumber should return the last 4 digits in the SSN", () => {
